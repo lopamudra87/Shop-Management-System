@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% block title %}Suppliers{% endblock %}
+{% block page_title %}Suppliers{% endblock %}
+{% block content %}
+<div class="layout-split">
+    <div class="section-panel">
+        <h2>Supplier Directory</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for supplier in suppliers %}
+                    <tr>
+                        <td>{{ supplier.name }}</td>
+                        <td>{{ supplier.email }}</td>
+                        <td>{{ supplier.phone }}</td>
+                        <td>{{ supplier.city }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No suppliers found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="section-panel">
+        <h2>Add Supplier</h2>
+        <form method="post" class="card-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button" type="submit">Create Supplier</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% block title %}Reports{% endblock %}
+{% block page_title %}Reports & Insights{% endblock %}
+{% block content %}
+<div class="grid panel-grid">
+    <section class="panel">
+        <h3>Top Stocked Products</h3>
+        <ul class="list-card">
+            {% for product in top_products %}
+                <li>{{ product.name }} — {{ product.stock }} units</li>
+            {% empty %}
+                <li>No products available yet.</li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="panel">
+        <h3>Top Customers</h3>
+        <ul class="list-card">
+            {% for customer in best_customers %}
+                <li>{{ customer.name }} — ${{ customer.total_spent|default:0|floatformat:2 }}</li>
+            {% empty %}
+                <li>No customer sales available yet.</li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

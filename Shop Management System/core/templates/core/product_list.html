@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% block title %}Products{% endblock %}
+{% block page_title %}Product Catalog{% endblock %}
+{% block content %}
+<div class="toolbar">
+    <a class="button" href="{% url 'product_create' %}">Add Product</a>
+</div>
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>{{ product.stock }}</td>
+                <td>${{ product.price|floatformat:2 }}</td>
+                <td>{{ product.is_active|yesno:'Active,Inactive' }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">No products found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
